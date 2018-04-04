@@ -44,6 +44,43 @@ namespace BlackJack.Games
             }
         }
 
+        protected bool Bet(double amount)
+        {
+            if (Player.Balance == 0)
+            {
+                DepositOrQuit();
+            }
+            else if (amount > Player.Balance)
+            {
+                Console.WriteLine($"Can't bet amounts higher than {Player.Name}'s balance {Player.Balance}{Currency}");
+            }
+            else
+            {
+                if (amount < MinBet)
+                {
+                    Console.WriteLine($"Can't bet amounts lower than the minimum bet amount {MinBet}{Currency}");
+                }
+                else if (amount > MaxBet)
+                {
+                    Console.WriteLine($"Can't bet amounts higher than the max bet amount {MaxBet}{Currency}");
+                }
+                else if (amount > Host.Balance)
+                {
+                    Console.WriteLine($"Can't bet amounts higher than the {Host.Name}'s balance {Host.Balance}{Currency}");
+                }
+                else
+                {
+                    Player.Balance -= amount;
+                    Host.Balance -= amount;
+                    Console.WriteLine($"{Player.Name} bet {amount}{Currency}");
+                    PrintLine();
+                    return true;
+                }
+            }
+            PrintLine();
+            return false;
+        }
+
         public void Win(double amount, double bet, string prefix, string suffix)
         {
             Player.Wins++;

@@ -120,9 +120,11 @@ namespace BlackJack.Games.BlackJack
         public void NewRound(double betAmount)
         {
             BlackJackRoundSettings settings = new BlackJackRoundSettings(AllowDoubling, DoubleMinValue, DoubleMaxValue, AllowSplitting, MaxSplits);
-            List<CardHand> playerHands = new List<CardHand>() { new CardHand(betAmount) };
+            List<CardHand> playerHands = new List<CardHand>() {
+                new CardHand(betAmount)
+            };
             CardHand dealerHand = new CardHand(betAmount);
-            if (Bet(betAmount, playerHands[0]))
+            if (Bet(betAmount))
             {
                 if (CardDeck.Deck.Count != 52)
                 {

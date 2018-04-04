@@ -10,7 +10,7 @@
         // Notes & differences in this blackjack game: (compared to "real" blackjack, such as the rules listed at https://www.pagat.com/banking/blackjack.html)
         // * Dealer's balance doesn't increase or decrease when the player deposits/withdraws money
         // * Insurance & surrender functions are not included
-        // * If the user doubles, the game allows the max bet to be overridden (maybe not a flaw?)
+        // * When the user doubles/splits, the game allows the max bet to be overridden (maybe not a flaw?)
         // * The user is always paid out 1.5x on blackjack, even if the blackjack is hit later in the game after the second card is drawn (maybe not a flaw?)
         // * If the dealer gets a blackjack on the second card it's not disclosed, the user gets to continus making choices (maybe not a flaw?)
         // * Splitting doesn't work the exact same way as described; 

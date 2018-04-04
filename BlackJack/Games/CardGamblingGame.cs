@@ -49,52 +49,6 @@ namespace BlackJack.Games
             CardDeck = new CardDeck(deckAmount);
         }
 
-        protected bool Bet(double amount, CardHand hand)
-        {
-            if (Player.Balance == 0)
-            {
-                DepositOrQuit();
-            }
-            else if (amount > Player.Balance)
-            {
-                Console.WriteLine($"Can't bet amounts higher than {Player.Name}'s balance {Player.Balance}{Currency}");
-            }
-            else
-            {
-                if (amount < MinBet)
-                {
-                    Console.WriteLine($"Can't bet amounts lower than the minimum bet amount {MinBet}{Currency}");
-                }
-                else if (amount > MaxBet)
-                {
-                    Console.WriteLine($"Can't bet amounts higher than the max bet amount {MaxBet}{Currency}");
-                }
-                else if (amount > Host.Balance)
-                {
-                    Console.WriteLine($"Can't bet amounts higher than the {Host.Name}'s balance {Host.Balance}{Currency}");
-                }
-                else
-                {
-                    Player.Balance -= amount;
-                    Host.Balance -= amount;
-                    hand.HandBet = amount;
-                    Console.WriteLine($"{Player.Name} bet {amount}{Currency}");
-                    PrintLine();
-                    return true;
-                }
-            }
-            PrintLine();
-            return false;
-        }
-
-        public void DoubleBet(CardHand hand)
-        {
-            Console.WriteLine($"{Player.Name} doubled bet {hand.HandBet}{Currency} to {hand.HandBet * 2}{Currency}");
-            Player.Balance -= hand.HandBet;
-            Host.Balance -= hand.HandBet;
-            hand.HandBet = hand.HandBet * 2;
-        }
-
         public bool DrawCard(string playerName, bool hideCard, CardHand hand, int sleep, bool pressAKey)
         {
             bool ret = false;
@@ -116,6 +70,14 @@ namespace BlackJack.Games
                 PressAKey("Press a key to continue");
             }
             return ret;
+        }
+
+        public void DoubleBet(CardHand hand)
+        {
+            Console.WriteLine($"{Player.Name} doubled bet {hand.HandBet}{Currency} to {hand.HandBet * 2}{Currency}");
+            Player.Balance -= hand.HandBet;
+            Host.Balance -= hand.HandBet;
+            hand.HandBet = hand.HandBet * 2;
         }
 
         public int GetHandIndex(List<CardHand> hands, CardHand hand)
