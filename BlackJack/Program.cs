@@ -12,7 +12,7 @@
         // * Insurance & surrender functions are not included
         // * When the user doubles/splits, the game allows the max bet to be overridden (maybe not a flaw?)
         // * The user is always paid out 1.5x on blackjack, even if the blackjack is hit later in the game after the second card is drawn (maybe not a flaw?)
-        // * If the dealer gets a blackjack on the second card it's not disclosed, the user gets to continus making choices (maybe not a flaw?)
+        // * If the dealer gets a blackjack on the second card it's not disclosed, the user gets to continue making choices (maybe not a flaw?)
         // * Splitting doesn't work the exact same way as described; 
         //  - can not split different 10-point cards (etc. king and queen)
         //  - dealer doesn't automatically deal second cards
