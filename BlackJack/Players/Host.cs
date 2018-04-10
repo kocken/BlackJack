@@ -2,6 +2,6 @@
 {
     class Host : Player
     {
-        public Host(string name, string currency, double balance) : base(name, currency, balance, false) { }
+        public Host(string name, Currency currency, double balance) : base(name, currency, balance, false) { }
     }
 }

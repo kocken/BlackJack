@@ -9,31 +9,31 @@ namespace BlackJack.Games
     {
         public CardDeck CardDeck { get; protected set; }
 
-        public CardGamblingGame(string gameName, string currency, string hostName, double dealerBalance) :
+        public CardGamblingGame(string gameName, Currency currency, string hostName, double dealerBalance) :
             base(gameName, currency, new Host(hostName, currency, dealerBalance), new Player("Player", currency))
         {
             Init();
         }
 
-        public CardGamblingGame(string gameName, string currency, string hostName, double dealerBalance, string playerName) :
+        public CardGamblingGame(string gameName, Currency currency, string hostName, double dealerBalance, string playerName) :
             base(gameName, currency, new Host(hostName, currency, dealerBalance), new Player(playerName, currency))
         {
             Init();
         }
 
-        public CardGamblingGame(string gameName, string currency, string hostName, double dealerBalance, string playerName, double deposit) :
+        public CardGamblingGame(string gameName, Currency currency, string hostName, double dealerBalance, string playerName, double deposit) :
             base(gameName, currency, new Host(hostName, currency, dealerBalance), new Player(playerName, currency, deposit, true))
         {
             Init();
         }
 
-        public CardGamblingGame(string gameName, string currency, string hostName, double dealerBalance, string playerName, double deposit, int deckAmount) :
+        public CardGamblingGame(string gameName, Currency currency, string hostName, double dealerBalance, string playerName, double deposit, int deckAmount) :
             base(gameName, currency, new Host(hostName, currency, dealerBalance), new Player(playerName, currency, deposit, true))
         {
             Init(deckAmount);
         }
 
-        public CardGamblingGame(string gameName, string currency, string hostName, double dealerBalance, string playerName, double deposit, int deckAmount, double minBet, double maxBet) :
+        public CardGamblingGame(string gameName, Currency currency, string hostName, double dealerBalance, string playerName, double deposit, int deckAmount, double minBet, double maxBet) :
             base(gameName, currency, new Host(hostName, currency, dealerBalance), new Player(playerName, currency, deposit, true), minBet, maxBet)
         {
             Init(deckAmount);
@@ -74,7 +74,7 @@ namespace BlackJack.Games
 
         public void DoubleBet(CardHand hand)
         {
-            Console.WriteLine($"{Player.Name} doubled bet {hand.HandBet}{Currency} to {hand.HandBet * 2}{Currency}");
+            Console.WriteLine($"{Player.Name} doubled bet {hand.HandBet} {CurrencyUtil.GetCode(Currency)} to {hand.HandBet * 2} {CurrencyUtil.GetCode(Currency)}");
             Player.Balance -= hand.HandBet;
             Host.Balance -= hand.HandBet;
             hand.HandBet = hand.HandBet * 2;

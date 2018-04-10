@@ -61,6 +61,7 @@
     <Compile Include="Cards\CardHand.cs" />
     <Compile Include="Cards\PlayingCard.cs" />
     <Compile Include="Cards\PlayingCardData.cs" />
+    <Compile Include="Currency.cs" />
     <Compile Include="Games\BlackJack\BlackJack.cs" />
     <Compile Include="Games\BlackJack\BlackJackRoundSettings.cs" />
     <Compile Include="Games\CardGamblingGame.cs" />

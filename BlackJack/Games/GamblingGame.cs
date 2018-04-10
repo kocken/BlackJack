@@ -6,7 +6,7 @@ namespace BlackJack.Games
     abstract class GamblingGame
     {
         public string GameName { get; protected set; }
-        public string Currency { get; set; }
+        public Currency Currency { get; set; }
 
         public bool Running { get; protected set; }
 
@@ -16,17 +16,17 @@ namespace BlackJack.Games
         public double MinBet { get; protected set; }
         public double MaxBet { get; protected set; }
 
-        public GamblingGame(string gameName, string currency, Host host, Player player)
+        public GamblingGame(string gameName, Currency currency, Host host, Player player)
         {
             Init(gameName, currency, host, player, 20, 1000);
         }
 
-        public GamblingGame(string gameName, string currency, Host host, Player player, double minBet, double maxBet)
+        public GamblingGame(string gameName, Currency currency, Host host, Player player, double minBet, double maxBet)
         {
             Init(gameName, currency, host, player, minBet, maxBet);
         }
 
-        private void Init(string gameName, string currency, Host host, Player player, double minBet, double maxBet)
+        private void Init(string gameName, Currency currency, Host host, Player player, double minBet, double maxBet)
         {
             GameName = gameName;
             Currency = currency;
@@ -52,27 +52,27 @@ namespace BlackJack.Games
             }
             else if (amount > Player.Balance)
             {
-                Console.WriteLine($"Can't bet amounts higher than {Player.Name}'s balance {Player.Balance}{Currency}");
+                Console.WriteLine($"Can't bet amounts higher than {Player.Name}'s balance {Player.Balance} {CurrencyUtil.GetCode(Currency)}");
             }
             else
             {
                 if (amount < MinBet)
                 {
-                    Console.WriteLine($"Can't bet amounts lower than the minimum bet amount {MinBet}{Currency}");
+                    Console.WriteLine($"Can't bet amounts lower than the minimum bet amount {MinBet} {CurrencyUtil.GetCode(Currency)}");
                 }
                 else if (amount > MaxBet)
                 {
-                    Console.WriteLine($"Can't bet amounts higher than the max bet amount {MaxBet}{Currency}");
+                    Console.WriteLine($"Can't bet amounts higher than the max bet amount {MaxBet} {CurrencyUtil.GetCode(Currency)}");
                 }
                 else if (amount > Host.Balance)
                 {
-                    Console.WriteLine($"Can't bet amounts higher than the {Host.Name}'s balance {Host.Balance}{Currency}");
+                    Console.WriteLine($"Can't bet amounts higher than the {Host.Name}'s balance {Host.Balance} {CurrencyUtil.GetCode(Currency)}");
                 }
                 else
                 {
                     Player.Balance -= amount;
                     Host.Balance -= amount;
-                    Console.WriteLine($"{Player.Name} bet {amount}{Currency}");
+                    Console.WriteLine($"{Player.Name} bet {amount} {CurrencyUtil.GetCode(Currency)}");
                     PrintLine();
                     return true;
                 }
@@ -87,7 +87,7 @@ namespace BlackJack.Games
             Host.Losses++;
             Player.Balance += amount;
             Console.WriteLine((!string.IsNullOrWhiteSpace(prefix) ? prefix + " " : "") +
-                $"{Player.Name} won {amount}{Currency} (" + (amount - bet) + $"{Currency} profit)" +
+                $"{Player.Name} won {amount} {CurrencyUtil.GetCode(Currency)} (" + (amount - bet) + $" {CurrencyUtil.GetCode(Currency)} profit)" +
                 (!string.IsNullOrWhiteSpace(suffix) ? " " + suffix : ""));
         }
 
@@ -100,7 +100,7 @@ namespace BlackJack.Games
             {
                 Player.HaveBeenCleaned = true;
             }
-            Console.WriteLine($"{Player.Name} lost {amount}{Currency}");
+            Console.WriteLine($"{Player.Name} lost {amount} {CurrencyUtil.GetCode(Currency)}");
         }
 
         public void Push(double amount)
@@ -109,7 +109,7 @@ namespace BlackJack.Games
             Host.Ties++;
             Player.Balance += amount;
             Host.Balance += amount;
-            Console.WriteLine($"{Player.Name} got a push of {amount}{Currency}");
+            Console.WriteLine($"{Player.Name} got a push of {amount} {CurrencyUtil.GetCode(Currency)}");
         }
 
         public bool HasEnoughBalance()
@@ -186,7 +186,7 @@ namespace BlackJack.Games
 
         public void Deposit()
         {
-            if (GetInput($"Assign the amount (in {Currency}) that you'd like to deposit to the {GameName} game", out double input))
+            if (GetInput($"Assign the amount (in {CurrencyUtil.GetCode(Currency)}) that you'd like to deposit to the {GameName} game", out double input))
             {
                 Player.Deposit(input, true);
             }
@@ -195,7 +195,7 @@ namespace BlackJack.Games
 
         public void Withdraw()
         {
-            if (GetInput($"Assign the amount (in {Currency}) that you'd like to withdraw from the {GameName} game", out double input))
+            if (GetInput($"Assign the amount (in {CurrencyUtil.GetCode(Currency)}) that you'd like to withdraw from the {GameName} game", out double input))
             {
                 Player.Withdraw(input, true);
             }

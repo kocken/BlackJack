@@ -10,7 +10,7 @@ namespace BlackJack.Games.BlackJack
     {
         // these static variables are the default ones passed to CardGamblingGame when parameters assigned to this BlackJack class doesn't suffice
         private new static string GameName = "Blackjack";
-        private new static string Currency = "kr";
+        private new static Currency Currency = Currency.Krona;
         private static string PlayerName = "Player";
         private static string DealerName = "Dealer";
         private static double DealerStartBalance = 10000;
@@ -27,41 +27,41 @@ namespace BlackJack.Games.BlackJack
             Init();
         }
 
-        public BlackJack(string currency) : base(GameName, currency, DealerName, DealerStartBalance, PlayerName)
+        public BlackJack(Currency currency) : base(GameName, currency, DealerName, DealerStartBalance, PlayerName)
         {
             Init();
         }
 
-        public BlackJack(string currency, string playerName) : base(GameName, currency, DealerName, DealerStartBalance, playerName)
+        public BlackJack(Currency currency, string playerName) : base(GameName, currency, DealerName, DealerStartBalance, playerName)
         {
             Init();
         }
 
-        public BlackJack(string currency, string playerName, double deposit) : base(GameName, currency, DealerName, DealerStartBalance, playerName, deposit)
+        public BlackJack(Currency currency, string playerName, double deposit) : base(GameName, currency, DealerName, DealerStartBalance, playerName, deposit)
         {
             Init();
         }
 
-        public BlackJack(string currency, string playerName, double deposit, int deckAmount, double minBet, double maxBet) :
+        public BlackJack(Currency currency, string playerName, double deposit, int deckAmount, double minBet, double maxBet) :
             base(GameName, currency, DealerName, DealerStartBalance, playerName, deposit, deckAmount, minBet, maxBet)
         {
             Init();
         }
 
-        public BlackJack(string currency, string playerName, double deposit, int deckAmount, double minBet, double maxBet, string dealerName, double dealerStartBalance) :
+        public BlackJack(Currency currency, string playerName, double deposit, int deckAmount, double minBet, double maxBet, string dealerName, double dealerStartBalance) :
             base(GameName, currency, dealerName, dealerStartBalance, playerName, deposit, deckAmount, minBet, maxBet)
         {
             Init();
         }
 
-        public BlackJack(string currency, string playerName, double deposit, int deckAmount, double minBet, double maxBet, string dealerName, double dealerStartBalance,
+        public BlackJack(Currency currency, string playerName, double deposit, int deckAmount, double minBet, double maxBet, string dealerName, double dealerStartBalance,
             bool allowDoubling, bool allowSplitting) :
             base(GameName, currency, dealerName, dealerStartBalance, playerName, deposit, deckAmount, minBet, maxBet)
         {
             Init(allowDoubling, allowSplitting);
         }
 
-        public BlackJack(string currency, string playerName, double deposit, int deckAmount, double minBet, double maxBet, string dealerName, double dealerStartBalance,
+        public BlackJack(Currency currency, string playerName, double deposit, int deckAmount, double minBet, double maxBet, string dealerName, double dealerStartBalance,
             bool allowDoubling, int doubleMinValue, int doubleMaxValue, bool allowSplitting, int maxSplits) :
             base(GameName, currency, dealerName, dealerStartBalance, playerName, deposit, deckAmount, minBet, maxBet)
         {
@@ -91,7 +91,7 @@ namespace BlackJack.Games.BlackJack
         {
             while (Running)
             {
-                Console.WriteLine($"{Player.Name}'s balance: {Player.Balance}{Currency}, {Host.Name}'s balance: {Host.Balance}{Currency}");
+                Console.WriteLine($"{Player.Name}'s balance: {Player.Balance} {CurrencyUtil.GetCode(Currency)}, {Host.Name}'s balance: {Host.Balance} {CurrencyUtil.GetCode(Currency)}");
                 if (Player.Wins > 0 || Player.Losses > 0 || Player.Ties > 0)
                 {
                     Console.WriteLine("Wins: " + Player.Wins + ", Losses: " + Player.Losses + ", Pushes: " + Player.Ties);
@@ -104,14 +104,14 @@ namespace BlackJack.Games.BlackJack
                 {
                     if (HasEnoughBalance()) // If user have the exact or more money required for a min bet
                     {
-                        if (GetInput($"You have {Player.Balance}{Currency} available. How much would you like to bet?", out double input))
+                        if (GetInput($"You have {Player.Balance} {CurrencyUtil.GetCode(Currency)} available. How much would you like to bet?", out double input))
                         {
                             NewRound(input);
                         }
                     }
                     else
                     {
-                        Console.WriteLine($"Not enough balance to start a new round, the minimum bet is {MinBet}{Currency}");
+                        Console.WriteLine($"Not enough balance to start a new round, the minimum bet is {MinBet} {CurrencyUtil.GetCode(Currency)}");
                     }
                 }
             }
@@ -289,7 +289,7 @@ namespace BlackJack.Games.BlackJack
         public void Split(BlackJackRoundSettings settings, List<CardHand> playerHands, CardHand currentHand)
         {
             Console.WriteLine($"{Player.Name} splitted hand " +
-                $"({currentHand.Cards[0].ToString()} & {currentHand.Cards[1].ToString()}) and bet another {currentHand.HandBet}{Currency}");
+                $"({currentHand.Cards[0].ToString()} & {currentHand.Cards[1].ToString()}) and bet another {currentHand.HandBet} {CurrencyUtil.GetCode(Currency)}");
             Player.Balance -= currentHand.HandBet;
             Host.Balance -= currentHand.HandBet;
             int index = GetHandIndex(playerHands, currentHand);
