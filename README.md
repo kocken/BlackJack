@@ -1,9 +1,7 @@
 # BlackJack
 A "Black Jack" console game in C#, written as a hobby-project november 2017 while attending a C# course. 
-Only blackjack is supported, however there's a solid base that was coded in mind of being built as a platform with plenty of interfaces and classes that can be resused so new games can relatively easily and fastly get added.
+Only blackjack is supported, however there's a solid base that was nicely coded in mind of being built as a platform with plenty of interfaces and object classes that can be resused so new gambling games relatively easily and fastly can get coded.
 Slightly changed structure 2018-04-04 - structured each class to have its own file and added the "currency" parameter.
-
-Neatly OOP-coded, relatively easy to reuse code and add support for other gambling games.
 
 Notes & differences in this blackjack game: (compared to "real" blackjack, such as the rules listed at https://www.pagat.com/banking/blackjack.html)
 * Dealer's balance doesn't increase or decrease when the player deposits/withdraws money
