@@ -1,4 +1,6 @@
 # BlackJack
+![Alt text](BlackJack.gif?raw=true "Preview")
+
 A "Black Jack" console game in C#, written as a hobby-project november 2017 while attending a C# course. 
 Only blackjack is supported, however there's a solid base that was nicely coded in mind of being built as a platform with plenty of interfaces and object classes that can be resused so new gambling games relatively easily and fastly can get coded.
 Slightly changed structure 2018-04-04 - structured each class to have its own file and added the "currency" parameter.
